@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.assesment.entity.*;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    List<User> findByName(String name);
-    User findByEmail(String email);
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    List<UserEntity> findByName(String name);
+    UserEntity findByEmail(String email);
 }

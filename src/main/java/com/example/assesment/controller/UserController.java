@@ -1,7 +1,7 @@
 package com.example.assesment.controller;
 
 
-import com.example.assesment.entity.User;
+import com.example.assesment.entity.UserEntity;
 import com.example.assesment.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,18 +16,18 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/create")
-    public User createuser( @RequestBody User user)
+    public UserEntity createuser(@RequestBody UserEntity userEntity)
     {
-        return userService.createUser(user);
+        return userService.createUser(userEntity);
     }
 
     @GetMapping("/all")
-    public List<User> getAllUsers(){
+    public List<UserEntity> getAllUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id){
+    public UserEntity getUserById(@PathVariable Long id){
         return userService.getUserById(id);
     }
 

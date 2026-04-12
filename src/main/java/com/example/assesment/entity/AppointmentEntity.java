@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -19,12 +20,12 @@ public class AppointmentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentId;
     private LocalDate appointmentDate;
+    private LocalTime appointmentTime;
     private String doctorName;
     private String status;
 
     @ManyToOne // Many Appointments → One Patient
     @JoinColumn(name = "patientId", nullable = false) //This creates a FOREIGN KEY column in appointments table called "patientId"
-
     private PatientEntity patient; // JPA stores the FULL PatientEntity object! ,
     // So when you fetch an Appointment —you get the COMPLETE patient data inside it!
 }

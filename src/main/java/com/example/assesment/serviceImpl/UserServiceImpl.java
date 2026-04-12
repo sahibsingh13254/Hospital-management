@@ -2,10 +2,9 @@ package com.example.assesment.serviceImpl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.assesment.entity.UserEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.assesment.entity.User;
 import com.example.assesment.repository.UserRepository;
 import com.example.assesment.service.UserService;
 
@@ -19,21 +18,20 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User createUser(User user){
-        return userRepository.save(user);
+    public UserEntity createUser(UserEntity userEntity){
+        return userRepository.save(userEntity);
     }
 
     @Override
-    public List<User> getAllUsers(){
+    public List<UserEntity> getAllUsers(){
         return userRepository.findAll();
     }
 
     @Override
-    public User getUserById(Long id){
+    public UserEntity getUserById(Long id){
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("user not found at Id :" +id));
     }
-
     @Override
     public void deleteUser(Long id){
         userRepository.deleteById(id);
