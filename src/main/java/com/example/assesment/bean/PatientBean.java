@@ -2,13 +2,13 @@ package com.example.assesment.bean;
 
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Getter
+@Setter
 public class PatientBean {
 
 
@@ -18,7 +18,6 @@ public class PatientBean {
     private String patientName;
 
     @NotNull(message = "Age is required")
-    @Size(min = 10, max = 100 , message = "Above 10 and below 100" )
     private Integer age;
 
     @NotNull(message = "Gender is required")

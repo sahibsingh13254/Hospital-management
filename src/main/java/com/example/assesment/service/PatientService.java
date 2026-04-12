@@ -8,6 +8,6 @@ public  interface PatientService {
 
     PatientBean savePatient(PatientBean patientBean);
     List<PatientBean> getAllPatients();
-    PatientBean getPatientById (Long patientId);
+    PatientBean getById (Long patientId);
 
 }

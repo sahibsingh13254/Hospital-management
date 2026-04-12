@@ -2,9 +2,7 @@ package com.example.assesment.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
@@ -12,6 +10,8 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor    //  generates no-arg constructor
 @AllArgsConstructor   // generates all-arg constructor
 @Table(name ="patients")
+@Getter
+@Setter
 public class PatientEntity {
 
     @Id

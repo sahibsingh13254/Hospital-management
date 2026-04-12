@@ -12,16 +12,27 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class PatientServiceImpl implements PatientService {
-
     private final PatientDAOWrapper patientDAOWrapper;
 
+    /**
+     To-Do Item 1.9: This method should fetch all patient details.
+
+     TODO:
+     --Invoke getAllPatients() method of PatientDAOWrapper to fetch all patients
+     --Return the list of PatientBean objects
+     */
 
     @Override
     public List<PatientBean> getAllPatients(){
         return patientDAOWrapper.getAllPatients();
     }
 
-
+    /**
+     To-Do Item 1.10: This method should save patient details.
+     TODO:
+     --Invoke savePatient() method of PatientDAOWrapper to save patient
+     --Return the saved PatientBean received from DAO layer
+     */
     @Override
     public PatientBean savePatient(PatientBean patientBean){
         return patientDAOWrapper.savePatient(patientBean);
@@ -36,9 +47,7 @@ public class PatientServiceImpl implements PatientService {
      */
 
     @Override
-    public PatientBean getById(Long patientId) {
-        return patientDAOWrapper.getById(patientId);
+    public PatientBean getById(Long id){
+        return patientDAOWrapper.getById(id);
     }
-
-
 }

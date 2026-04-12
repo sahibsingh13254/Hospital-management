@@ -18,18 +18,6 @@ public class PatientDAOWrapper {
 
     private final PatientDAO patientDAO;
 
-    /**
-     To-Do Item 1.3: This method should save patient details into the database.
-     NOTE: This requirement needs to be implemented using Spring Data JPA.
-
-     TODO:
-     --Check if the input PatientBean is null, throw appropriate exception
-     --Convert PatientBean to PatientEntity(Hint: Utilize provided utility methods)
-     --Invoke save() method of PatientDAO to persist patient details
-     --Convert saved PatientEntity back to PatientBean(Hint: Utilize provided utility methods)
-     --Return the saved patient details
-     */
-
     public PatientBean savePatient(PatientBean patientBean)
     {
         if(patientBean == null) {
@@ -43,17 +31,6 @@ public class PatientDAOWrapper {
         PatientBean pBean = convertPatientEntityToBean(savedPatient);// Always use the returned entity from save(),i.e savedPatient
         return pBean;
     }
-    /**
-     To-Do Item 1.4: This method should fetch all patient details from the database.
-     NOTE: This requirement needs to be implemented using Spring Data JPA.
-
-     TODO:
-     --Invoke findAll() method of PatientDAO to retrieve all patient entities
-     --Check if the returned list is null or empty, handle appropriately
-     --Convert each PatientEntity to PatientBean (Hint: Utilize provided utility methods)
-     --Add all converted beans to a result list
-     --Return the list of PatientBean objects
-     */
 
     public List<PatientBean> getAllPatients(){
 
@@ -69,13 +46,6 @@ public class PatientDAOWrapper {
         }
         return pBeans;
     }
-    /**
-     To-Do Item 1.5: This method should fetch patient details by ID from the database.
-     NOTE: This requirement needs to be implemented using Spring Data JPA.
-
-     TODO:
-     --Invoke findById() method of PatientDAO to retrieve patient entity.
-     */
 
     public PatientEntity getPatientById(Long id){
         Optional<PatientEntity> optional = patientDAO.findById(id);
@@ -83,7 +53,7 @@ public class PatientDAOWrapper {
     }
 
     public PatientBean getById(Long id){
-        Optional <PatientEntity> opt = patientDAO.findById(id);
+        Optional<PatientEntity> opt = patientDAO.findById(id);
         if(opt.isPresent()) {
             PatientBean bean = new PatientBean();
             BeanUtils.copyProperties(opt.get(), bean);
@@ -91,7 +61,6 @@ public class PatientDAOWrapper {
         }
         return null;
     }
-
 
         //We are taking input perimeter as patientEntity bcz that we have to convert.
     private PatientBean convertPatientEntityToBean(PatientEntity patientE){

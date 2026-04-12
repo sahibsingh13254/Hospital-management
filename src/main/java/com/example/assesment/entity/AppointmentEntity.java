@@ -2,9 +2,7 @@ package com.example.assesment.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,6 +12,8 @@ import java.time.LocalTime;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Table(name = "appointments")
+@Getter
+@Setter
 public class AppointmentEntity {
 
     @Id
