@@ -1,12 +1,12 @@
 package com.example.assesment.service;
 
-import com.example.assesment.bean.AppointmentBean;
+import com.example.assesment.bean.AppointmentDTO;
 
 import java.util.List;
 
 public interface AppointmentService {
 
-    AppointmentBean saveAppointment(AppointmentBean appointmentBean);
-    List<AppointmentBean> getAllAppointments();
+    AppointmentDTO saveAppointment(AppointmentDTO appointmentDTO);
+    List<AppointmentDTO> getAllAppointments();
 
 }

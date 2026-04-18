@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @Getter
 @Setter
-public class PatientBean {
+public class PatientDTO {
 
 
     private Long patientId;

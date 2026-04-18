@@ -1,6 +1,5 @@
 package com.example.assesment.bean;
 
-import com.example.assesment.entity.PatientEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -14,7 +13,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class AppointmentBean {
+public class AppointmentDTO {
 
 
     private Long appointmentId;
@@ -30,6 +29,6 @@ public class AppointmentBean {
     @NotEmpty(message = "Doctor name is required")
     private String doctorName;
 
-    private PatientBean patient;
+    private PatientDTO patient;
 
 }

@@ -1,7 +1,7 @@
 package com.example.assesment.serviceImpl;
 
 
-import com.example.assesment.bean.AppointmentBean;
+import com.example.assesment.bean.AppointmentDTO;
 import com.example.assesment.dao.AppointmentDAOWrapper;
 import com.example.assesment.service.AppointmentService;
 import lombok.AllArgsConstructor;
@@ -16,13 +16,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentDAOWrapper appointmentDAOWrapper;
 
     @Override
-    public AppointmentBean saveAppointment(AppointmentBean appointmentBean)
+    public AppointmentDTO saveAppointment(AppointmentDTO appointmentDTO)
     {
-        return appointmentDAOWrapper.saveAppointment(appointmentBean);
+        return appointmentDAOWrapper.saveAppointment(appointmentDTO);
     }
 
     @Override
-    public List<AppointmentBean> getAllAppointments(){
+    public List<AppointmentDTO> getAllAppointments(){
         return appointmentDAOWrapper.getAllAppointments();
     }
 

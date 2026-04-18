@@ -1,7 +1,6 @@
 package com.example.assesment.serviceImpl;
 
-import com.example.assesment.bean.PatientBean;
-import com.example.assesment.dao.PatientDAO;
+import com.example.assesment.bean.PatientDTO;
 import com.example.assesment.dao.PatientDAOWrapper;
 import com.example.assesment.service.PatientService;
 import lombok.AllArgsConstructor;
@@ -23,7 +22,7 @@ public class PatientServiceImpl implements PatientService {
      */
 
     @Override
-    public List<PatientBean> getAllPatients(){
+    public List<PatientDTO> getAllPatients(){
         return patientDAOWrapper.getAllPatients();
     }
 
@@ -34,8 +33,8 @@ public class PatientServiceImpl implements PatientService {
      --Return the saved PatientBean received from DAO layer
      */
     @Override
-    public PatientBean savePatient(PatientBean patientBean){
-        return patientDAOWrapper.savePatient(patientBean);
+    public PatientDTO savePatient(PatientDTO patientDTO){
+        return patientDAOWrapper.savePatient(patientDTO);
     }
 
     /**
@@ -47,7 +46,7 @@ public class PatientServiceImpl implements PatientService {
      */
 
     @Override
-    public PatientBean getById(Long id){
+    public PatientDTO getById(Long id){
         return patientDAOWrapper.getById(id);
     }
 }

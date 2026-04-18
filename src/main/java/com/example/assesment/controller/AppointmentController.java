@@ -1,8 +1,8 @@
 package com.example.assesment.controller;
 
 
-import com.example.assesment.bean.AppointmentBean;
-import com.example.assesment.bean.PatientBean;
+import com.example.assesment.bean.AppointmentDTO;
+import com.example.assesment.bean.PatientDTO;
 import com.example.assesment.service.AppointmentService;
 import com.example.assesment.service.PatientService;
 import jakarta.validation.Valid;
@@ -24,19 +24,19 @@ public class AppointmentController
     private final AppointmentService appointmentService;
 
     @RequestMapping(value = "/save" , method = RequestMethod.POST)
-    public ResponseEntity<?> saveAppointment (@RequestBody@Valid AppointmentBean appointmentBean , BindingResult result) throws Exception {
+    public ResponseEntity<?> saveAppointment (@RequestBody@Valid AppointmentDTO appointmentDTO, BindingResult result) throws Exception {
 
         if (result.hasErrors()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(result.getAllErrors());
         }
-        Long patientId = appointmentBean.getPatient().getPatientId();
-        PatientBean patient = patientService.getById(patientId);
+        Long patientId = appointmentDTO.getPatient().getPatientId();
+        PatientDTO patient = patientService.getById(patientId);
 
-        appointmentBean.setPatient(patient);
+        appointmentDTO.setPatient(patient);
 
-        AppointmentBean saved = appointmentService.saveAppointment(appointmentBean);
+        AppointmentDTO saved = appointmentService.saveAppointment(appointmentDTO);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -44,8 +44,8 @@ public class AppointmentController
     }
 
         @RequestMapping(value = "/list", method = RequestMethod.GET)
-        public ResponseEntity<List<AppointmentBean>> listAppointments(){
-            List<AppointmentBean> appointments = appointmentService.getAllAppointments();
+        public ResponseEntity<List<AppointmentDTO>> listAppointments(){
+            List<AppointmentDTO> appointments = appointmentService.getAllAppointments();
             return ResponseEntity.ok(appointments);
         }
 

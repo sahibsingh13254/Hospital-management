@@ -1,8 +1,8 @@
 package com.example.assesment.dao;
 
 
-import com.example.assesment.bean.AppointmentBean;
-import com.example.assesment.bean.PatientBean;
+import com.example.assesment.bean.AppointmentDTO;
+import com.example.assesment.bean.PatientDTO;
 import com.example.assesment.entity.AppointmentEntity;
 import com.example.assesment.entity.PatientEntity;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +38,7 @@ public class AppointmentDAOWrapper {
      */
 
     // aBean - an object (instance) of AppointmentBean, containing data sent from client
-    public AppointmentBean saveAppointment(AppointmentBean aBean){
+    public AppointmentDTO saveAppointment(AppointmentDTO aBean){
         //get patientId from bean
         Long patientId = aBean.getPatient().getPatientId();
 
@@ -70,14 +70,14 @@ public class AppointmentDAOWrapper {
      --Return the list of AppointmentBean objects
      */
 
-    public List<AppointmentBean> getAllAppointments(){
+    public List<AppointmentDTO> getAllAppointments(){
 
         // fetch from DB
         List<AppointmentEntity> entities  = appointmentDAO.findAll();
 
         if (entities == null) { return new ArrayList<>(); }
 
-        List<AppointmentBean> beans = new ArrayList<>();
+        List<AppointmentDTO> beans = new ArrayList<>();
 
         for (AppointmentEntity entity : entities)
         {
@@ -91,21 +91,21 @@ public class AppointmentDAOWrapper {
 
 
        // Entity -> Bean
-    private AppointmentBean convertAppointmentEntityToBean(AppointmentEntity aEntity){
-        AppointmentBean aBean = new AppointmentBean();
+    private AppointmentDTO convertAppointmentEntityToBean(AppointmentEntity aEntity){
+        AppointmentDTO aBean = new AppointmentDTO();
         BeanUtils.copyProperties(aEntity , aBean);
         // patient         ❌ SKIPPED (different types!)
         //manually handle patient
         if(aEntity.getPatient() != null){
-            PatientBean patientBean = new PatientBean();
-            BeanUtils.copyProperties(aEntity.getPatient(), patientBean);
-            aBean.setPatient(patientBean);
+            PatientDTO patientDTO = new PatientDTO();
+            BeanUtils.copyProperties(aEntity.getPatient(), patientDTO);
+            aBean.setPatient(patientDTO);
         }
         return aBean;
     }
 
     //Bean -> Entity
-    private AppointmentEntity convertAppointmentBeanToEntity(AppointmentBean aBean){
+    private AppointmentEntity convertAppointmentBeanToEntity(AppointmentDTO aBean){
         AppointmentEntity aEntity = new AppointmentEntity();
         BeanUtils.copyProperties(aBean , aEntity);
         return aEntity;
