@@ -1,52 +1,64 @@
 package com.example.assesment.serviceImpl;
 
 import com.example.assesment.bean.PatientDTO;
-import com.example.assesment.dao.PatientDAOWrapper;
+import com.example.assesment.entity.PatientEntity;
+import com.example.assesment.repository.PatientRepository;
 import com.example.assesment.service.PatientService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class PatientServiceImpl implements PatientService {
-    private final PatientDAOWrapper patientDAOWrapper;
 
-    /**
-     To-Do Item 1.9: This method should fetch all patient details.
+    private final ModelMapper modelMapper;
+    private final PatientRepository patientRepository;
 
-     TODO:
-     --Invoke getAllPatients() method of PatientDAOWrapper to fetch all patients
-     --Return the list of PatientBean objects
-     */
+
+
+    @Override
+    public PatientDTO savePatient(PatientDTO patientDTO)
+    {
+        if (patientDTO == null) {
+            throw new RuntimeException("Patient Data can't be null!");
+        }
+
+        // DTO → Entity
+        PatientEntity entity = modelMapper.map(patientDTO, PatientEntity.class);
+
+        // Save
+        PatientEntity savedPatient = patientRepository.save(entity);
+
+        // Entity → DTO
+        return modelMapper.map(savedPatient, PatientDTO.class);
+    }
 
     @Override
     public List<PatientDTO> getAllPatients(){
-        return patientDAOWrapper.getAllPatients();
+
+        List<PatientEntity> entities = patientRepository.findAll();
+
+        if (entities == null || entities.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return entities.stream()
+                .map(entity -> modelMapper.map(entity, PatientDTO.class))
+                .toList();
     }
 
-    /**
-     To-Do Item 1.10: This method should save patient details.
-     TODO:
-     --Invoke savePatient() method of PatientDAOWrapper to save patient
-     --Return the saved PatientBean received from DAO layer
-     */
-    @Override
-    public PatientDTO savePatient(PatientDTO patientDTO){
-        return patientDAOWrapper.savePatient(patientDTO);
-    }
+    public PatientDTO getById(Long patientId){
 
-    /**
-     To-Do Item 1.11: This method should fetch patient details by ID.
+        PatientEntity patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient Not Found at id:" +patientId));
 
-     TODO:
-     --Invoke getById() method of PatientDAOWrapper to fetch patient details.
-     --Return the PatientBean received from DAO layer
-     */
+                return modelMapper.map(patient , PatientDTO.class);
 
-    @Override
-    public PatientDTO getById(Long id){
-        return patientDAOWrapper.getById(id);
+
+
     }
 }
